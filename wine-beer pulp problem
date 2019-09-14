@@ -1,5 +1,5 @@
 import pulp
-model = pulp.LpProblem("Mtl Community Center", pulp.LpMaximize)
+model1 = pulp.LpProblem("Mtl Community Center", pulp.LpMaximize)
 Xw = pulp.LpVariable('Xw', lowBound=0, cat=pulp.LpContinuous)
 Xb = pulp.LpVariable('Xb', lowBound=0, cat= pulp.LpContinuous)
 obj = 3000*Xw+2000*Xb
@@ -7,16 +7,16 @@ hops = Xw+2*Xb <= 6
 malt = 2*Xw+Xb <= 8
 diff_prod = Xb-Xw <= 1
 upper_bound = Xb <= 2
-model += obj
-model += hops
-model += malt
-model += diff_prod
-model += upper_bound
-model
-model.solve()
+model1 += obj
+model1 += hops
+model1 += malt
+model1 += diff_prod
+model1 += upper_bound
+model1
+model1.solve()
 pulp.value(Xw)
 pulp.value(Xb)
-pulp.value(model.objective)
+pulp.value(model1.objective)
 print("Reduced Cost for Xw:", Xw.dj)
 print("Shadow Price for hops:", hops.pi)
 print("Shadow Price for malt:", malt.pi)
